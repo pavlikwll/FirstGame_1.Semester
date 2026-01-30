@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerDMG : MonoBehaviour
 {
-    public float damage = 30f;
+    [SerializeField] public float damage = 20f;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -14,6 +14,7 @@ public class PlayerDMG : MonoBehaviour
         {
             Debug.Log("enemy found");
             enemyHealth.TakeDamage(damage);
+            return;
         }
         else
         {
@@ -24,12 +25,13 @@ public class PlayerDMG : MonoBehaviour
         
         if (environmentHealth != null)
         {
-            Debug.Log("enemy found");
+            Debug.Log("something found");
             environmentHealth.TakeDamage(damage);
+            return;
         }
         else
         {
-            Debug.Log("no enemyHealth");
+            Debug.Log("no more something");
         }
     }
 }

@@ -17,21 +17,22 @@ public class ShadowPatrolMovement : MonoBehaviour
     [SerializeField] private float turnCooldown = 0.15f;
 
     private float turnTimer;
+    
+    private void FlipIfNeeded()
+    {
+        if (facingDirection == FacingDirection.Right)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+    }
 
     private void Awake()
     {
-        ApplyDirection();
-    }
-
-    private void FixedUpdate()
-    {
-        if (turnTimer > 0f)
-        {
-            turnTimer -= Time.deltaTime;
-        }
-
-        Patrol();
-        UpdateAnimator();
+        FlipIfNeeded();
     }
 
     private void Patrol()
@@ -46,6 +47,18 @@ public class ShadowPatrolMovement : MonoBehaviour
 
         rb.linearVelocity = new Vector2(patrolSpeed * DirectionSign(), rb.linearVelocity.y);
     }
+    
+    private void FixedUpdate()
+    {
+        if (turnTimer > 0f)
+        {
+            turnTimer -= Time.deltaTime;
+        }
+
+        Patrol();
+    }
+
+    
 
     public void ChangeDirection()
     {
@@ -58,10 +71,9 @@ public class ShadowPatrolMovement : MonoBehaviour
             facingDirection = FacingDirection.Right;
         }
 
-        ApplyDirection();
+        FlipIfNeeded();
     }
-
-    // Right = +1, Left = -1
+    
     public int DirectionSign()
     {
         if (facingDirection == FacingDirection.Right)
@@ -72,23 +84,5 @@ public class ShadowPatrolMovement : MonoBehaviour
         {
             return -1;
         }
-    }
-
-    private void ApplyDirection()
-    {
-        if (facingDirection == FacingDirection.Right)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
-    }
-
-    private void UpdateAnimator()
-    {
-        if (!animator) return;
-        animator.SetFloat("MovementValue", Mathf.Abs(rb.linearVelocity.x));
     }
 }

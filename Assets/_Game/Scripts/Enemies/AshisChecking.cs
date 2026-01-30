@@ -5,7 +5,7 @@ public class AshisChecking : MonoBehaviour
     [Header("Chick-Chirick")]
     public Transform Warrior;
     public Transform Ash;
-    private bool WarriorIn;
+   // private bool WarriorIn;
 
     private void Update()
     {
@@ -13,7 +13,7 @@ public class AshisChecking : MonoBehaviour
         if (Warrior.position.x > transform.position.x)
         {
             Ash.transform.rotation = Quaternion.Euler(0, 180, 0);
-            Debug.Log("turning");
+//            Debug.Log("turning");
         }
         else
         {
@@ -23,17 +23,23 @@ public class AshisChecking : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (!other.CompareTag("Player"))
+        {
+            return;
+        }
 
-        WarriorIn = true;
+      //  WarriorIn = true;
         Debug.Log("player in");
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (!other.CompareTag("Player"))
+        {
+            return;
+        }
 
-        WarriorIn = false;
+        //WarriorIn = false;
         Debug.Log("player out");
     }
 }

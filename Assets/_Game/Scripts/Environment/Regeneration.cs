@@ -35,7 +35,7 @@ public class Regeneration : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        print("something entered");
+//        print("something entered");
         if (other.CompareTag("Player"))
         {
             somethingIn = true;

@@ -23,7 +23,6 @@ namespace ___WorkData.Scripts.Player
         #region INSPECTOR VARIABLES
         [Header("Movement")]
         [SerializeField] private float walkingSpeed = 8f;
-        [SerializeField] private float maxHorizontalVelocity = 8f;
         [SerializeField] private float jumpForce = 8f;
 
         [Header("Ground Check")]
@@ -61,7 +60,7 @@ namespace ___WorkData.Scripts.Player
         private Vector2 moveInput;
         public bool grounded;
 
-        private bool Jumping;
+        //private bool Jumping;
         private bool canJump = true;
 
         public PlayerMovementState movementState;
@@ -190,7 +189,7 @@ namespace ___WorkData.Scripts.Player
         {
             if (!grounded || !canJump) return;
 
-            Jumping = true;
+            //Jumping = true;
             canJump = false;
             actionState = PlayerActionState.Jump;
 
@@ -201,7 +200,7 @@ namespace ___WorkData.Scripts.Player
 
         private void AnimEvent_EndJump()
         {
-            Jumping = false;
+            //Jumping = false;
             canJump = true;
             actionState = PlayerActionState.Default;
         }
@@ -212,7 +211,7 @@ namespace ___WorkData.Scripts.Player
         {
             if(playerInteractions == null)
             {
-                Debug.LogWarning("No PlayerInteraction component to the player attached");
+                Debug.Log("No PlayerInteraction component to the player attached");
                 return;
             }
         

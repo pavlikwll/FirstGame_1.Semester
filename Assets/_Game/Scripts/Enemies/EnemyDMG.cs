@@ -12,7 +12,7 @@ public class EnemyDMG : MonoBehaviour
     [SerializeField] private Animator animator;
 
     //private float timer;
-    private bool WarriorIn;
+    //private bool WarriorIn;
     
     /*
     private void FixedUpdate()
@@ -38,8 +38,8 @@ public class EnemyDMG : MonoBehaviour
             return;
         }
         
-        WarriorIn = true;
-
+        //arriorIn = true;
+        Debug.Log("inside");
         // вмикаємо анімацію атаки
         if (animator)
         {
@@ -53,21 +53,29 @@ public class EnemyDMG : MonoBehaviour
             timer = cooldown;
         }
         */
+        
+        Health warriorHealth = other.GetComponent<Health>();
+        if (warriorHealth != null)
+        {
+            warriorHealth.TakeDamage(damage);
+        }
     }
 
+/*
 private void OnTriggerStay2D(Collider2D other)
 {
-    if (!other.CompareTag("Player"))
-    {
-        return;
-    }
+   if (!other.CompareTag("Player"))
+   {
+       return;
+   }
 
-    Health warriorHealth = other.GetComponent<Health>();
-    if (warriorHealth != null)
-    {
-        warriorHealth.TakeDamage(damage * Time.deltaTime);
-    }
+   Health warriorHealth = other.GetComponent<Health>();
+   if (warriorHealth != null)
+   {
+       warriorHealth.TakeDamage(damage * Time.deltaTime);
+   }
 }
+*/
 
 private void OnTriggerExit2D(Collider2D other)
 {
@@ -77,20 +85,12 @@ if (!other.CompareTag("Player"))
 return;
 }
 
-WarriorIn = false;
+//WarriorIn = false;
 
 // вимикаємо анімацію атаки
 if (animator)
 {
-    animator.SetBool(Attack, false);
-}
-}
-
-public void OnCollisionEnter2D(Collision2D collision)
-{
-if (collision.gameObject.CompareTag("Player"))
-{
-   collision.gameObject.GetComponent<Health>().TakeDamage(damage);
+   animator.SetBool(Attack, false);
 }
 }
 }

@@ -25,7 +25,7 @@ public class Health : MonoBehaviour
     {
         if (healthBar != null)
         {
-            print("updating healthbar");
+//            print("updating healthbar");
             healthBar.fillAmount = Mathf.Clamp(health / maxHealth, 0f, 1f);
         }
     }
@@ -46,7 +46,7 @@ public class Health : MonoBehaviour
 
     public void Heal(float amount)
     {
-        print("healing");
+//        print("healing");
         health += amount;
         health = Mathf.Clamp(health, 0f, maxHealth);
         UpdateHealthBar();
